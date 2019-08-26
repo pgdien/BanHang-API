@@ -1,0 +1,15 @@
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\BanHang_API.deps.json
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\BanHang_API.runtimeconfig.json
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\BanHang_API.runtimeconfig.dev.json
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\BanHang_API.dll
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.csprojAssemblyReference.cache
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.RazorAssemblyInfo.cache
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.RazorAssemblyInfo.cs
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.AssemblyInfoInputs.cache
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.AssemblyInfo.cs
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.RazorTargetAssemblyInfo.cache
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\bin\Debug\netcoreapp2.1\BanHang_API.pdb
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.dll
+D:\Project\ToolLiuTiu\BanHang\BanHang_API\BanHang_API\obj\Debug\netcoreapp2.1\BanHang_API.pdb
