@@ -25,15 +25,15 @@ namespace BanHang_API.Connect
                         while (reader.Read())
                         {
                             lCT_DonHang.Add(new CT_DonHang { CTDH_ID = reader.GetInt32(reader.GetOrdinal("CTDH_ID")), 
-                                                        CTDH_CHA_ID = reader.GetInt32(reader.GetOrdinal("CTDH_CHA_ID")),
-                                                        DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
-                                                        HANGHOA_ID = reader.GetInt32(reader.GetOrdinal("HANGHOA_ID")),
-                                                        DONGIA = reader.GetFloat(reader.GetOrdinal("DONGIA")),
-                                                        SOLUONG = reader.GetFloat(reader.GetOrdinal("SOLUONG")),
-                                                        TONGTIEN = reader.GetFloat(reader.GetOrdinal("TONGTIEN")),
-                                                        THUCTHU = reader.GetFloat(reader.GetOrdinal("THUCTHU")),
-                                                        TIEN_CONGTHEM = reader.GetFloat(reader.GetOrdinal("TIEN_CONGTHEM")),
-                                                        GHICHU = reader.GetString(reader.GetOrdinal("GHICHU"))
+                                                            CTDH_CHA_ID = reader.IsDBNull(reader.GetOrdinal("CTDH_CHA_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("CTDH_CHA_ID")),
+                                                            DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
+                                                            HANGHOA_ID = reader.GetInt32(reader.GetOrdinal("HANGHOA_ID")),
+                                                            DONGIA = reader.GetFloat(reader.GetOrdinal("DONGIA")),
+                                                            SOLUONG = reader.GetFloat(reader.GetOrdinal("SOLUONG")),
+                                                            TONGTIEN = reader.GetFloat(reader.GetOrdinal("TONGTIEN")),
+                                                            THUCTHU = reader.GetFloat(reader.GetOrdinal("THUCTHU")),
+                                                            TIEN_CONGTHEM = reader.GetFloat(reader.GetOrdinal("TIEN_CONGTHEM")),
+                                                            GHICHU = reader.GetString(reader.GetOrdinal("GHICHU"))
                             });
                         }
                     }

@@ -27,7 +27,7 @@ namespace BanHang_API.Connect
                             lDonHang.Add(new DonHang
                             {
                                 DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
-                                KHACHHANG_ID = reader.GetInt32(reader.GetOrdinal("KHACHHANG_ID")),
+                                KHACHHANG_ID = reader.IsDBNull(reader.GetOrdinal("KHACHHANG_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("KHACHHANG_ID")),
                                 NGAY_LAP = reader.GetDateTime(reader.GetOrdinal("NGAY_LAP")),
                                 LOAIDH_ID = reader.GetInt32(reader.GetOrdinal("LOAIDH_ID")),
                                 TTDH_ID = reader.GetInt32(reader.GetOrdinal("TTDH_ID")),
