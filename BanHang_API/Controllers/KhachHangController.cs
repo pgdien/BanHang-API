@@ -22,9 +22,10 @@ namespace BanHang_API.Controllers
 
         // GET api/KhachHang/5
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<CT_DonHang>> Get(int id)
+        public ActionResult<KhachHang> Get(int id)
         {
-            return null;
+            KhachHang_DTO mysqlGet = new KhachHang_DTO();
+            return mysqlGet.getKhachHang(id);
         }
 
         // POST api/KhachHang

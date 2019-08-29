@@ -39,5 +39,36 @@ namespace BanHang_API.Connect
             }
             return lKhachhang;
         }
+        public KhachHang getKhachHang(int id)
+        {
+            KhachHang lKhachhang = new KhachHang();
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT KHACHHANG_ID, MA_KH, TEN_KH, SDT, GHICHU FROM KHACHHANG where KHACHHANG_ID=@KHACHHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("KHACHHANG_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lKhachhang = (new KhachHang
+                            {
+                                KHACHHANG_ID = reader.GetInt32(reader.GetOrdinal("KHACHHANG_ID")),
+                                MA_KH = reader.GetString(reader.GetOrdinal("MA_KH")),
+                                TEN_KH = reader.GetString(reader.GetOrdinal("TEN_KH")),
+                                SDT = reader.GetString(reader.GetOrdinal("SDT")),
+                                GHICHU = reader.GetString(reader.GetOrdinal("GHICHU"))
+                            });
+                        }
+                    }
+                }
+                connMySQL.Close();
+            }
+            return lKhachhang;
+        }
     }
 }

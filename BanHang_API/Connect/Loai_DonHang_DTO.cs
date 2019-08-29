@@ -36,5 +36,33 @@ namespace BanHang_API.Connect
             }
             return lLoai_DonHang;
         }
+        public Loai_DonHang getLoai_DonHang(int id)
+        {
+            Loai_DonHang lLoai_DonHang = new Loai_DonHang();
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT LOAIDH_ID, TEN_LDH FROM LOAI_DH where LOAIDH_ID=@LOAIDH_ID";
+                    cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lLoai_DonHang=(new Loai_DonHang
+                            {
+                                LOAIDH_ID = reader.GetInt32(reader.GetOrdinal("LOAIDH_ID")),
+                                TEN_LDH = reader.GetString(reader.GetOrdinal("TEN_LDH"))
+                            });
+                        }
+                    }
+                }
+                connMySQL.Close();
+            }
+            return lLoai_DonHang;
+        }
     }
 }

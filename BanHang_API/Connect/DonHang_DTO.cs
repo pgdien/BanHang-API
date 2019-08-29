@@ -41,5 +41,38 @@ namespace BanHang_API.Connect
             }
             return lDonHang;
         }
+        public DonHang getDonHang(int id)
+        {
+            DonHang lDonHang = new DonHang();
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG where DONHANG_ID=@DONHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lDonHang=(new DonHang
+                            {
+                                DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
+                                KHACHHANG_ID = reader.IsDBNull(reader.GetOrdinal("KHACHHANG_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("KHACHHANG_ID")),
+                                NGAY_LAP = reader.GetDateTime(reader.GetOrdinal("NGAY_LAP")),
+                                LOAIDH_ID = reader.GetInt32(reader.GetOrdinal("LOAIDH_ID")),
+                                TTDH_ID = reader.GetInt32(reader.GetOrdinal("TTDH_ID")),
+                                MA_DH = reader.GetString(reader.GetOrdinal("MA_DH")),
+                                STT = reader.GetInt32(reader.GetOrdinal("STT"))
+                            });
+                        }
+                    }
+                }
+                connMySQL.Close();
+            }
+            return lDonHang;
+        }
     }
 }
