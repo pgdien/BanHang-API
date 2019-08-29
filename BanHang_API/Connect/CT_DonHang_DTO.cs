@@ -78,5 +78,32 @@ namespace BanHang_API.Connect
             }
             return lCT_DonHang;
         }
+        public int addCT_DonHang(CT_DonHang ct_DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO CHITIET_DH(CTDH_ID, CTDH_CHA_ID, DONHANG_ID, HANGHOA_ID, DONGIA, SOLUONG, TONGTIEN, THUCTHU, TIEN_CONGTHEM, GHICHU) V" +
+                        "ALUES (CTDH_CHA_ID=@CTDH_CHA_ID, DONHANG_ID=@DONHANG_ID, HANGHOA_ID=@HANGHOA_ID, DONGIA=@DONGIA, SOLUONG=@SOLUONG, TONGTIEN=@TONGTIEN, THUCTHU=@THUCTHU, TIEN_CONGTHEM=@TIEN_CONGTHEM, GHICHU=@GHICHU)";
+                    cmd.Parameters.Add(new MySqlParameter("CTDH_CHA_ID", ct_DH.CTDH_CHA_ID));
+                    cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", ct_DH.DONHANG_ID));
+                    cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", ct_DH.HANGHOA_ID));
+                    cmd.Parameters.Add(new MySqlParameter("DONGIA", ct_DH.DONGIA));
+                    cmd.Parameters.Add(new MySqlParameter("SOLUONG", ct_DH.SOLUONG));
+                    cmd.Parameters.Add(new MySqlParameter("TONGTIEN", ct_DH.TONGTIEN));
+                    cmd.Parameters.Add(new MySqlParameter("THUCTHU", ct_DH.THUCTHU));
+                    cmd.Parameters.Add(new MySqlParameter("TIEN_CONGTHEM", ct_DH.TIEN_CONGTHEM));
+                    cmd.Parameters.Add(new MySqlParameter("GHICHU", ct_DH.GHICHU));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

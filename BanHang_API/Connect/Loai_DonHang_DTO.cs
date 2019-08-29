@@ -64,5 +64,23 @@ namespace BanHang_API.Connect
             }
             return lLoai_DonHang;
         }
+        public int addLoaiDonHang(Loai_DonHang loai_DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO LOAI_DH(LOAIDH_ID, TEN_LDH) VALUES (TEN_LDH=@TEN_LDH)";
+                    cmd.Parameters.Add(new MySqlParameter("TEN_LDH", loai_DH.TEN_LDH));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

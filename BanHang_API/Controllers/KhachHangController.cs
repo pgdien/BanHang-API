@@ -46,8 +46,18 @@ namespace BanHang_API.Controllers
 
         // POST api/KhachHang
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(KhachHang kh)
         {
+            try
+            {
+                KhachHang_DTO mysqlGet = new KhachHang_DTO();
+                return mysqlGet.addKhachHang(kh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // PUT api/KhachHang/5

@@ -46,8 +46,18 @@ namespace BanHang_API.Controllers
 
         // POST api/DonHang
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(DonHang dh)
         {
+            try
+            {
+                DonHang_DTO mysqlGet = new DonHang_DTO();
+                return mysqlGet.addDonHang(dh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // PUT api/DonHang/5

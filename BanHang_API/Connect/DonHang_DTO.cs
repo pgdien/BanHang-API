@@ -74,5 +74,30 @@ namespace BanHang_API.Connect
             }
             return lDonHang;
         }
+        public int addDonHang(DonHang DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO DONHANG(DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU) " +
+                        "VALUES (KHACHHANG_ID=@KHACHHANG_ID, NGAY_LAP=@NGAY_LAP, LOAIDH_ID=@LOAIDH_ID, TTDH_ID=@TTDH_ID, MA_DH=@MA_DH, STT=@STT, GHICHU=@GHICHU)";
+                    cmd.Parameters.Add(new MySqlParameter("KHACHHANG_ID", DH.KHACHHANG_ID));
+                    cmd.Parameters.Add(new MySqlParameter("NGAY_LAP", DH.NGAY_LAP));
+                    cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", DH.LOAIDH_ID));
+                    cmd.Parameters.Add(new MySqlParameter("TTDH_ID", DH.TTDH_ID));
+                    cmd.Parameters.Add(new MySqlParameter("MA_DH", DH.MA_DH));
+                    cmd.Parameters.Add(new MySqlParameter("STT", DH.STT));
+                    cmd.Parameters.Add(new MySqlParameter("GHICHU", DH.GHICHU));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

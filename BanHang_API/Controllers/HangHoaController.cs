@@ -46,8 +46,18 @@ namespace BanHang_API.Controllers
 
         // POST api/HangHoa
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(HangHoa hh)
         {
+            try
+            {
+                HangHoa_DTO mysqlGet = new HangHoa_DTO();
+                return mysqlGet.addHangHoa(hh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // PUT api/HangHoa/5

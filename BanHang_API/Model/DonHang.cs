@@ -23,5 +23,7 @@ namespace BanHang_API.Model
         { get; set; }
         public int STT
         { get; set; }
+        public string GHICHU
+        { get; set; }
     }
 }
