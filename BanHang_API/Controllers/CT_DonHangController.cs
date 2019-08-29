@@ -16,16 +16,31 @@ namespace BanHang_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CT_DonHang>> Get()
         {
-            CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
-            return mysqlGet.getCT_DonHang();
+            try
+            {
+                CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
+                return mysqlGet.getCT_DonHang();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET api/CT_DonHang/5
         [HttpGet("{id}")]
         public ActionResult<CT_DonHang> Get(int id)
         {
-            CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
-            return mysqlGet.getCT_DonHang(id);
+            try
+            {
+                CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
+                return mysqlGet.getCT_DonHang(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         // POST api/CT_DonHang

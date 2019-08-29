@@ -16,16 +16,32 @@ namespace BanHang_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<KhachHang>> Get()
         {
-            KhachHang_DTO mysqlGet = new KhachHang_DTO();
-            return mysqlGet.getKhachHang();
+            try
+            {
+                KhachHang_DTO mysqlGet = new KhachHang_DTO();
+                return mysqlGet.getKhachHang();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET api/KhachHang/5
         [HttpGet("{id}")]
         public ActionResult<KhachHang> Get(int id)
         {
-            KhachHang_DTO mysqlGet = new KhachHang_DTO();
-            return mysqlGet.getKhachHang(id);
+            try
+            {
+                KhachHang_DTO mysqlGet = new KhachHang_DTO();
+                return mysqlGet.getKhachHang(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST api/KhachHang

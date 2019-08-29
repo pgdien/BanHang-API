@@ -16,16 +16,32 @@ namespace BanHang_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Loai_DonHang>> Get()
         {
-            Loai_DonHang_DTO mysqlGet = new Loai_DonHang_DTO();
-            return mysqlGet.getLoai_DonHang();
+            try
+            {
+                Loai_DonHang_DTO mysqlGet = new Loai_DonHang_DTO();
+                return mysqlGet.getLoai_DonHang();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET api/Loai_DonHang/5
         [HttpGet("{id}")]
         public ActionResult<Loai_DonHang> Get(int id)
         {
-            Loai_DonHang_DTO mysqlGet = new Loai_DonHang_DTO();
-            return mysqlGet.getLoai_DonHang(id);
+            try
+            {
+                Loai_DonHang_DTO mysqlGet = new Loai_DonHang_DTO();
+                return mysqlGet.getLoai_DonHang(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST api/Loai_DonHang

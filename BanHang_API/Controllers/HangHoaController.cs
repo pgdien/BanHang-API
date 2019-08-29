@@ -16,16 +16,32 @@ namespace BanHang_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<HangHoa>> Get()
         {
-            HangHoa_DTO mysqlGet = new HangHoa_DTO();
-            return mysqlGet.getHangHoa();
+            try
+            {
+                HangHoa_DTO mysqlGet = new HangHoa_DTO();
+                return mysqlGet.getHangHoa();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET api/HangHoa/5
         [HttpGet("{id}")]
         public ActionResult<HangHoa> Get(int id)
         {
-            HangHoa_DTO mysqlGet = new HangHoa_DTO();
-            return mysqlGet.getHangHoa(id);
+            try
+            {
+                HangHoa_DTO mysqlGet = new HangHoa_DTO();
+                return mysqlGet.getHangHoa(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST api/HangHoa
