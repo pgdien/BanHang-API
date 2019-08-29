@@ -105,5 +105,51 @@ namespace BanHang_API.Connect
             }
             return kq;
         }
+        public int editCT_DonHang(CT_DonHang ct_DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE CHITIET_DH SET CTDH_CHA_ID=@CTDH_CHA_ID,DONHANG_ID=@DONHANG_ID,HANGHOA_ID=@HANGHOA_ID,DONGIA=@DONGIA,SOLUONG=@SOLUONG," +
+                        "TONGTIEN=@TONGTIEN,THUCTHU=@THUCTHU,TIEN_CONGTHEM=@TIEN_CONGTHEM,GHICHU=@GHICHU WHERE CTDH_ID=@CTDH_ID";
+                    cmd.Parameters.Add(new MySqlParameter("CTDH_CHA_ID", ct_DH.CTDH_CHA_ID));
+                    cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", ct_DH.DONHANG_ID));
+                    cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", ct_DH.HANGHOA_ID));
+                    cmd.Parameters.Add(new MySqlParameter("DONGIA", ct_DH.DONGIA));
+                    cmd.Parameters.Add(new MySqlParameter("SOLUONG", ct_DH.SOLUONG));
+                    cmd.Parameters.Add(new MySqlParameter("TONGTIEN", ct_DH.TONGTIEN));
+                    cmd.Parameters.Add(new MySqlParameter("THUCTHU", ct_DH.THUCTHU));
+                    cmd.Parameters.Add(new MySqlParameter("TIEN_CONGTHEM", ct_DH.TIEN_CONGTHEM));
+                    cmd.Parameters.Add(new MySqlParameter("GHICHU", ct_DH.GHICHU));
+                    cmd.Parameters.Add(new MySqlParameter("CTDH_ID", ct_DH.CTDH_ID));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
+        public int delCT_DonHang(int id)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM CHITIET_DH WHERE CTDH_ID=@CTDH_ID";
+                    cmd.Parameters.Add(new MySqlParameter("CTDH_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

@@ -85,5 +85,43 @@ namespace BanHang_API.Connect
             }
             return kq;
         }
+        public int editHangHoa(HangHoa hh)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE HANGHOA SET MA_HH=@MA_HH,TEN_HH=@TEN_HH WHERE HANGHOA_ID=@HANGHOA_ID";
+                    cmd.Parameters.Add(new MySqlParameter("MA_HH", hh.MA_HH));
+                    cmd.Parameters.Add(new MySqlParameter("TEN_HH", hh.TEN_HH));
+                    cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", hh.HANGHOA_ID));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
+        public int delHangHoa(int id)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM HANGHOA WHERE HANGHOA_ID=@HANGHOA_ID";
+                    cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

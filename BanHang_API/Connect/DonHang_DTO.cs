@@ -99,5 +99,48 @@ namespace BanHang_API.Connect
             }
             return kq;
         }
+        public int editDonHang(DonHang DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE DONHANG SET KHACHHANG_ID=@KHACHHANG_ID,NGAY_LAP=@NGAY_LAP,LOAIDH_ID=@LOAIDH_ID,TTDH_ID=@TTDH_ID,MA_DH=@MA_DH,STT=@STT,GHICHU=@GHICHU WHERE DONHANG_ID=@DONHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("KHACHHANG_ID", DH.KHACHHANG_ID));
+                    cmd.Parameters.Add(new MySqlParameter("NGAY_LAP", DH.NGAY_LAP));
+                    cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", DH.LOAIDH_ID));
+                    cmd.Parameters.Add(new MySqlParameter("TTDH_ID", DH.TTDH_ID));
+                    cmd.Parameters.Add(new MySqlParameter("MA_DH", DH.MA_DH));
+                    cmd.Parameters.Add(new MySqlParameter("STT", DH.STT));
+                    cmd.Parameters.Add(new MySqlParameter("GHICHU", DH.GHICHU));
+                    cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", DH.DONHANG_ID));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
+        public int delDonHang(int id)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM DONHANG WHERE DONHANG_ID=@DONHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

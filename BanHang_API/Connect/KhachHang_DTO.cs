@@ -92,5 +92,45 @@ namespace BanHang_API.Connect
             }
             return kq;
         }
+        public int editKhachHang(KhachHang kh)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE KHACHHANG SET MA_KH=@MA_KH,TEN_KH=@TEN_KH,SDT=@SDT,GHICHU=@GHICHU WHERE KHACHHANG_ID=@KHACHHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("MA_KH", kh.MA_KH));
+                    cmd.Parameters.Add(new MySqlParameter("TEN_KH", kh.TEN_KH));
+                    cmd.Parameters.Add(new MySqlParameter("SDT", kh.SDT));
+                    cmd.Parameters.Add(new MySqlParameter("GHICHU", kh.GHICHU));
+                    cmd.Parameters.Add(new MySqlParameter("KHACHHANG_ID", kh.KHACHHANG_ID));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
+        public int delKhachHang(int id)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM KHACHHANG WHERE KHACHHANG_ID=@KHACHHANG_ID";
+                    cmd.Parameters.Add(new MySqlParameter("KHACHHANG_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }

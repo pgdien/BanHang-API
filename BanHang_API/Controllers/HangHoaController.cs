@@ -62,14 +62,34 @@ namespace BanHang_API.Controllers
 
         // PUT api/HangHoa/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(HangHoa hh)
         {
+            try
+            {
+                HangHoa_DTO mysqlGet = new HangHoa_DTO();
+                return mysqlGet.editHangHoa(hh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // DELETE api/HangHoa/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            try
+            {
+                HangHoa_DTO mysqlGet = new HangHoa_DTO();
+                return mysqlGet.delHangHoa(id) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
     }
 }

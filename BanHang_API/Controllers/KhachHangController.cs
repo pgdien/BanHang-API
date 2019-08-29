@@ -62,14 +62,34 @@ namespace BanHang_API.Controllers
 
         // PUT api/KhachHang/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(KhachHang kh)
         {
+            try
+            {
+                KhachHang_DTO mysqlGet = new KhachHang_DTO();
+                return mysqlGet.editKhachHang(kh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // DELETE api/KhachHang/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            try
+            {
+                KhachHang_DTO mysqlGet = new KhachHang_DTO();
+                return mysqlGet.delKhachHang(id) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
     }
 }

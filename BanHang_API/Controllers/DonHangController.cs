@@ -62,14 +62,34 @@ namespace BanHang_API.Controllers
 
         // PUT api/DonHang/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(DonHang dh)
         {
+            try
+            {
+                DonHang_DTO mysqlGet = new DonHang_DTO();
+                return mysqlGet.editDonHang(dh) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
 
         // DELETE api/DonHang/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            try
+            {
+                DonHang_DTO mysqlGet = new DonHang_DTO();
+                return mysqlGet.delDonHang(id) == 0 ? "Không thành công" : "Thành công";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
         }
     }
 }

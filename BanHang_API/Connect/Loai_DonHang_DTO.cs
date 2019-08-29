@@ -82,5 +82,42 @@ namespace BanHang_API.Connect
             }
             return kq;
         }
+        public int editLoaiDonHang(Loai_DonHang loai_DH)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE LOAI_DH SET TEN_LDH=@TEN_LDH WHERE LOAIDH_ID=@LOAIDH_ID";
+                    cmd.Parameters.Add(new MySqlParameter("TEN_LDH", loai_DH.TEN_LDH));
+                    cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", loai_DH.LOAIDH_ID));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
+        public int delLoaiDonHang(int id)
+        {
+            int kq;
+            using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+            {
+                using (MySqlCommand cmd = connMySQL.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM `LOAI_DH` WHERE LOAIDH_ID=@LOAIDH_ID";
+                    cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", id));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = connMySQL;
+                    connMySQL.Open();
+                    kq = cmd.ExecuteNonQuery();
+                }
+                connMySQL.Close();
+            }
+            return kq;
+        }
     }
 }
