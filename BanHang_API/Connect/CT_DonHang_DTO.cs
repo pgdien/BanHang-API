@@ -86,7 +86,7 @@ namespace BanHang_API.Connect
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
                     cmd.CommandText = "INSERT INTO CHITIET_DH(CTDH_ID, CTDH_CHA_ID, DONHANG_ID, HANGHOA_ID, DONGIA, SOLUONG, TONGTIEN, THUCTHU, TIEN_CONGTHEM, GHICHU) V" +
-                        "ALUES (CTDH_CHA_ID=@CTDH_CHA_ID, DONHANG_ID=@DONHANG_ID, HANGHOA_ID=@HANGHOA_ID, DONGIA=@DONGIA, SOLUONG=@SOLUONG, TONGTIEN=@TONGTIEN, THUCTHU=@THUCTHU, TIEN_CONGTHEM=@TIEN_CONGTHEM, GHICHU=@GHICHU)";
+                                                    "ALUES (@CTDH_CHA_ID, @DONHANG_ID, @HANGHOA_ID, @DONGIA, @SOLUONG, @TONGTIEN, @THUCTHU, @TIEN_CONGTHEM, @GHICHU)";
                     cmd.Parameters.Add(new MySqlParameter("CTDH_CHA_ID", ct_DH.CTDH_CHA_ID));
                     cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", ct_DH.DONHANG_ID));
                     cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", ct_DH.HANGHOA_ID));

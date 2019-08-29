@@ -71,7 +71,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO LOAI_DH(LOAIDH_ID, TEN_LDH) VALUES (TEN_LDH=@TEN_LDH)";
+                    cmd.CommandText = "INSERT INTO LOAI_DH(LOAIDH_ID, TEN_LDH) VALUES (@TEN_LDH)";
                     cmd.Parameters.Add(new MySqlParameter("TEN_LDH", loai_DH.TEN_LDH));
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
