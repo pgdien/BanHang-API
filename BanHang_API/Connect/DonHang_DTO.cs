@@ -16,7 +16,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT a.DONHANG_ID, a.KHACHHANG_ID, a.NGAY_LAP, a.LOAIDH_ID, a.TTDH_ID, a.MA_DH, a.STT, b.TEN_LDH FROM DONHANG a, LOAI_DH b where a.LOAIDH_ID=b.LOAIDH_ID";
+                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG";
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
                     connMySQL.Open();
