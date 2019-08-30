@@ -1,9 +1,6 @@
 ﻿using BanHang_API.Model;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BanHang_API.Connect
 {
@@ -57,7 +54,7 @@ namespace BanHang_API.Connect
                     {
                         while (reader.Read())
                         {
-                            lDonHang=(new DonHang
+                            lDonHang = (new DonHang
                             {
                                 DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
                                 KHACHHANG_ID = reader.IsDBNull(reader.GetOrdinal("KHACHHANG_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("KHACHHANG_ID")),

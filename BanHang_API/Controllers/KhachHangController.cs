@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BanHang_API.Connect;
+﻿using BanHang_API.Connect;
 using BanHang_API.Model;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace BanHang_API.Controllers
 {

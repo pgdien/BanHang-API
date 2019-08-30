@@ -1,9 +1,6 @@
 ﻿using BanHang_API.Model;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BanHang_API.Connect
 {
@@ -53,7 +50,7 @@ namespace BanHang_API.Connect
                     {
                         while (reader.Read())
                         {
-                            lHangHoa=(new HangHoa
+                            lHangHoa = (new HangHoa
                             {
                                 HANGHOA_ID = reader.GetInt32(reader.GetOrdinal("HANGHOA_ID")),
                                 MA_HH = reader.GetString(reader.GetOrdinal("MA_HH")),
