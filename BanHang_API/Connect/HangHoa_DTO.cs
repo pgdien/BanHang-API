@@ -70,7 +70,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO HANGHOA(HANGHOA_ID, MA_HH, TEN_HH) VALUES (@MA_HH, @TEN_HH)";
+                    cmd.CommandText = "INSERT INTO HANGHOA(MA_HH, TEN_HH) VALUES (@MA_HH, @TEN_HH)";
                     cmd.Parameters.Add(new MySqlParameter("MA_HH", hh.MA_HH));
                     cmd.Parameters.Add(new MySqlParameter("TEN_HH", hh.TEN_HH));
                     cmd.CommandType = System.Data.CommandType.Text;
@@ -89,8 +89,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE HANGHOA SET MA_HH=@MA_HH,TEN_HH=@TEN_HH WHERE HANGHOA_ID=@HANGHOA_ID";
-                    cmd.Parameters.Add(new MySqlParameter("MA_HH", hh.MA_HH));
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH=@TEN_HH WHERE HANGHOA_ID=@HANGHOA_ID";
                     cmd.Parameters.Add(new MySqlParameter("TEN_HH", hh.TEN_HH));
                     cmd.Parameters.Add(new MySqlParameter("HANGHOA_ID", hh.HANGHOA_ID));
                     cmd.CommandType = System.Data.CommandType.Text;

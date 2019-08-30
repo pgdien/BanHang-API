@@ -68,7 +68,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO LOAI_DH(LOAIDH_ID, TEN_LDH) VALUES (@TEN_LDH)";
+                    cmd.CommandText = "INSERT INTO LOAI_DH(TEN_LDH) VALUES (@TEN_LDH)";
                     cmd.Parameters.Add(new MySqlParameter("TEN_LDH", loai_DH.TEN_LDH));
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
@@ -105,7 +105,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM `LOAI_DH` WHERE LOAIDH_ID=@LOAIDH_ID";
+                    cmd.CommandText = "DELETE FROM LOAI_DH WHERE LOAIDH_ID=@LOAIDH_ID";
                     cmd.Parameters.Add(new MySqlParameter("LOAIDH_ID", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
