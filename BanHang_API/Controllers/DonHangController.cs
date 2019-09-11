@@ -17,7 +17,37 @@ namespace BanHang_API.Controllers
             try
             {
                 DonHang_DTO mysqlGet = new DonHang_DTO();
-                return mysqlGet.getDonHang();
+                return mysqlGet.getDonHang("All");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        // GET api/DonHang/nhap
+        [HttpGet("nhap")]
+        public ActionResult<IEnumerable<DonHang>> GetNhap()
+        {
+            try
+            {
+                DonHang_DTO mysqlGet = new DonHang_DTO();
+                return mysqlGet.getDonHang("Nhập");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        // GET api/DonHang/xuat
+        [HttpGet("xuat")]
+        public ActionResult<IEnumerable<DonHang>> GetXuat()
+        {
+            try
+            {
+                DonHang_DTO mysqlGet = new DonHang_DTO();
+                return mysqlGet.getDonHang("Xuất");
             }
             catch (Exception)
             {
@@ -28,12 +58,12 @@ namespace BanHang_API.Controllers
 
         // GET api/DonHang/5
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<DonHang>> Get(int id)
+        public ActionResult<DonHang> Get(int id)
         {
             try
             {
                 DonHang_DTO mysqlGet = new DonHang_DTO();
-                return mysqlGet.getDonHang();
+                return mysqlGet.getDonHang(id);
             }
             catch (Exception)
             {
@@ -44,12 +74,12 @@ namespace BanHang_API.Controllers
 
         // POST api/DonHang
         [HttpPost]
-        public string Post(DonHang dh)
+        public string Post(DonHang hh)
         {
             try
             {
                 DonHang_DTO mysqlGet = new DonHang_DTO();
-                return mysqlGet.addDonHang(dh) == 0 ? "Không thành công" : "Thành công";
+                return mysqlGet.addDonHang(hh) == 0 ? "Không thành công" : "Thành công";
             }
             catch (Exception ex)
             {
@@ -60,12 +90,12 @@ namespace BanHang_API.Controllers
 
         // PUT api/DonHang/5
         [HttpPut("{id}")]
-        public string Put(DonHang dh)
+        public string Put(DonHang hh)
         {
             try
             {
                 DonHang_DTO mysqlGet = new DonHang_DTO();
-                return mysqlGet.editDonHang(dh) == 0 ? "Không thành công" : "Thành công";
+                return mysqlGet.editDonHang(hh) == 0 ? "Không thành công" : "Thành công";
             }
             catch (Exception ex)
             {

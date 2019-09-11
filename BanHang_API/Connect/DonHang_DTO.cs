@@ -6,14 +6,27 @@ namespace BanHang_API.Connect
 {
     public class DonHang_DTO
     {
-        public List<DonHang> getDonHang()
+        public List<DonHang> getDonHang(string value)
         {
             List<DonHang> lDonHang = new List<DonHang>();
             using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG";
+                    switch (value)
+                    {
+                        case "All":
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG";
+                            break;
+                        case "Nhập":
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG WHERE LOAIDH_ID=1";
+                            break;
+                        case "Xuất":
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG WHERE LOAIDH_ID=2";
+                            break;
+
+                    }
+                    
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
                     connMySQL.Open();
@@ -38,6 +51,7 @@ namespace BanHang_API.Connect
             }
             return lDonHang;
         }
+
         public DonHang getDonHang(int id)
         {
             DonHang lDonHang = new DonHang();
