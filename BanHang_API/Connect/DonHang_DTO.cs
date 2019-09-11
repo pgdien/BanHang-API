@@ -24,9 +24,7 @@ namespace BanHang_API.Connect
                         case "Xuất":
                             cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG WHERE LOAIDH_ID=2";
                             break;
-
                     }
-                    
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
                     connMySQL.Open();
