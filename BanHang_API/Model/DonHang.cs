@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BanHang_API.Model
 {
@@ -23,6 +24,8 @@ namespace BanHang_API.Model
         public string GHICHU
         { get; set; }
         public Double TIEN
+        { get; set; }
+        public List<CT_DonHang> LIST_CT_HD
         { get; set; }
     }
 }

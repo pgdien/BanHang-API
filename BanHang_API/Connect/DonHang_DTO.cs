@@ -59,7 +59,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG where DONHANG_ID=@DONHANG_ID";
+                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=@DONHANG_ID";
                     cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
@@ -76,7 +76,9 @@ namespace BanHang_API.Connect
                                 LOAIDH_ID = reader.GetInt32(reader.GetOrdinal("LOAIDH_ID")),
                                 TTDH_ID = reader.GetInt32(reader.GetOrdinal("TTDH_ID")),
                                 MA_DH = reader.GetString(reader.GetOrdinal("MA_DH")),
-                                STT = reader.GetInt32(reader.GetOrdinal("STT"))
+                                STT = reader.GetInt32(reader.GetOrdinal("STT")),
+                                GHICHU = reader.GetString(reader.GetOrdinal("GHICHU")),
+                                TIEN = reader.IsDBNull(reader.GetOrdinal("TIEN")) ? 0 : reader.GetDouble(reader.GetOrdinal("TIEN"))
                             });
                         }
                     }
