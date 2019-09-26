@@ -41,6 +41,21 @@ namespace BanHang_API.Controllers
             }
         }
 
+        // GET api/CT_DonHang/5
+        [HttpGet("for_hd/{id}")]
+        public ActionResult<IEnumerable<CT_DonHang>> Get(string id)
+        {
+            try
+            {
+                CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
+                return mysqlGet.getCT_DonHang(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         // POST api/CT_DonHang
         [HttpPost]
         public string Post(CT_DonHang ct_DH)
