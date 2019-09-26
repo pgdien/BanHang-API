@@ -19,10 +19,10 @@ namespace BanHang_API.Connect
                             cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG";
                             break;
                         case "Nhập":
-                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, 0 tien FROM DONHANG dh WHERE dh.LOAIDH_ID=1";
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=ct.DONHANG_ID) TIEN FROM DONHANG dh WHERE dh.LOAIDH_ID=1";
                             break;
                         case "Xuất":
-                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, 0 tien FROM DONHANG dh WHERE dh.LOAIDH_ID=2";
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=ct.DONHANG_ID) TIEN FROM DONHANG dh WHERE dh.LOAIDH_ID=2";
                             break;
                     }
                     cmd.CommandType = System.Data.CommandType.Text;
@@ -40,7 +40,9 @@ namespace BanHang_API.Connect
                                 LOAIDH_ID = reader.GetInt32(reader.GetOrdinal("LOAIDH_ID")),
                                 TTDH_ID = reader.GetInt32(reader.GetOrdinal("TTDH_ID")),
                                 MA_DH = reader.GetString(reader.GetOrdinal("MA_DH")),
-                                STT = reader.GetInt32(reader.GetOrdinal("STT"))
+                                STT = reader.GetInt32(reader.GetOrdinal("STT")),
+                                GHICHU = reader.GetString(reader.GetOrdinal("GHICHU")),
+                                TIEN = reader.IsDBNull(reader.GetOrdinal("TIEN")) ? 0 : reader.GetDouble(reader.GetOrdinal("TIEN"))
                             });
                         }
                     }

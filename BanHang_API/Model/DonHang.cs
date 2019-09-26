@@ -22,5 +22,7 @@ namespace BanHang_API.Model
         { get; set; }
         public string GHICHU
         { get; set; }
+        public Double TIEN
+        { get; set; }
     }
 }
