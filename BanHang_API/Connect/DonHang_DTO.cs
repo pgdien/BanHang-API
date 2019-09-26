@@ -59,7 +59,7 @@ namespace BanHang_API.Connect
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=@DONHANG_ID";
+                    cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, GHICHU, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=ct.DONHANG_ID) TIEN FROM DONHANG dh WHERE dh.DONHANG_ID=@DONHANG_ID";
                     cmd.Parameters.Add(new MySqlParameter("DONHANG_ID", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     cmd.Connection = connMySQL;
