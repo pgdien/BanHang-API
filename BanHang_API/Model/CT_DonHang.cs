@@ -24,5 +24,7 @@
         { get; set; }
         public string GHICHU
         { get; set; }
+        public string TEN_HH
+        { get; set; }
     }
 }
