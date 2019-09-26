@@ -19,10 +19,10 @@ namespace BanHang_API.Connect
                             cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG";
                             break;
                         case "Nhập":
-                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG WHERE LOAIDH_ID=1";
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=ct.DONHANG_ID) tien FROM DONHANG dh WHERE dh.LOAIDH_ID=1";
                             break;
                         case "Xuất":
-                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT FROM DONHANG WHERE LOAIDH_ID=2";
+                            cmd.CommandText = "SELECT DONHANG_ID, KHACHHANG_ID, NGAY_LAP, LOAIDH_ID, TTDH_ID, MA_DH, STT, (select sum(ct.TONGTIEN) from CHITIET_DH ct where dh.DONHANG_ID=ct.DONHANG_ID) tien FROM DONHANG dh WHERE dh.LOAIDH_ID=2";
                             break;
                     }
                     cmd.CommandType = System.Data.CommandType.Text;
