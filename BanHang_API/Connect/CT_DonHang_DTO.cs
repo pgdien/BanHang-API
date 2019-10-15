@@ -238,7 +238,7 @@ namespace BanHang_API.Connect
                     //    cmd.Parameters.AddWithValue("@title", prd.title);
                     //    cmd.Parameters.AddWithValue("@quantity", prd.quantity);
                     //    cmd.Parameters.AddWithValue("@itemId", prd.itemId);
-
+                    //cmd.Parameters.Clear();
                     //    cmd.ExecuteNonQuery();
                     //}
 
