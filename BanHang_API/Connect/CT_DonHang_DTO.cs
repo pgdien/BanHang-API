@@ -1,14 +1,51 @@
 ﻿using BanHang_API.Model;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace BanHang_API.Connect
 {
     public class CT_DonHang_DTO
     {
+        //public List<CT_DonHang> getCT_DonHang()
+        //{
+        //    List<CT_DonHang> lCT_DonHang = new List<CT_DonHang>();
+        //    using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+        //    {
+        //        using (MySqlCommand cmd = connMySQL.CreateCommand())
+        //        {
+        //            cmd.CommandText = "SELECT CTDH_ID, CTDH_CHA_ID, DONHANG_ID, HANGHOA_ID, DONGIA, SOLUONG, TONGTIEN, THUCTHU, TIEN_CONGTHEM, GHICHU FROM CHITIET_DH";
+        //            cmd.CommandType = System.Data.CommandType.Text;
+        //            cmd.Connection = connMySQL;
+        //            connMySQL.Open();
+        //            using (MySqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    lCT_DonHang.Add(new CT_DonHang
+        //                    {
+        //                        CTDH_ID = reader.GetInt32(reader.GetOrdinal("CTDH_ID")),
+        //                        CTDH_CHA_ID = reader.IsDBNull(reader.GetOrdinal("CTDH_CHA_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("CTDH_CHA_ID")),
+        //                        DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
+        //                        HANGHOA_ID = reader.GetInt32(reader.GetOrdinal("HANGHOA_ID")),
+        //                        DONGIA = reader.GetFloat(reader.GetOrdinal("DONGIA")),
+        //                        SOLUONG = reader.GetFloat(reader.GetOrdinal("SOLUONG")),
+        //                        TONGTIEN = reader.GetFloat(reader.GetOrdinal("TONGTIEN")),
+        //                        THUCTHU = reader.GetFloat(reader.GetOrdinal("THUCTHU")),
+        //                        TIEN_CONGTHEM = reader.GetFloat(reader.GetOrdinal("TIEN_CONGTHEM")),
+        //                        GHICHU = reader.GetString(reader.GetOrdinal("GHICHU"))
+        //                    });
+        //                }
+        //            }
+        //        }
+        //        connMySQL.Close();
+        //    }
+        //    return lCT_DonHang;
+        //}
         public List<CT_DonHang> getCT_DonHang()
         {
             List<CT_DonHang> lCT_DonHang = new List<CT_DonHang>();
+            string json;
             using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
             {
                 using (MySqlCommand cmd = connMySQL.CreateCommand())
@@ -19,22 +56,8 @@ namespace BanHang_API.Connect
                     connMySQL.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            lCT_DonHang.Add(new CT_DonHang
-                            {
-                                CTDH_ID = reader.GetInt32(reader.GetOrdinal("CTDH_ID")),
-                                CTDH_CHA_ID = reader.IsDBNull(reader.GetOrdinal("CTDH_CHA_ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("CTDH_CHA_ID")),
-                                DONHANG_ID = reader.GetInt32(reader.GetOrdinal("DONHANG_ID")),
-                                HANGHOA_ID = reader.GetInt32(reader.GetOrdinal("HANGHOA_ID")),
-                                DONGIA = reader.GetFloat(reader.GetOrdinal("DONGIA")),
-                                SOLUONG = reader.GetFloat(reader.GetOrdinal("SOLUONG")),
-                                TONGTIEN = reader.GetFloat(reader.GetOrdinal("TONGTIEN")),
-                                THUCTHU = reader.GetFloat(reader.GetOrdinal("THUCTHU")),
-                                TIEN_CONGTHEM = reader.GetFloat(reader.GetOrdinal("TIEN_CONGTHEM")),
-                                GHICHU = reader.GetString(reader.GetOrdinal("GHICHU"))
-                            });
-                        }
+                        var r = Serialize(reader);
+                        json = JsonConvert.SerializeObject(r, Formatting.Indented);
                     }
                 }
                 connMySQL.Close();
@@ -186,6 +209,77 @@ namespace BanHang_API.Connect
                 connMySQL.Close();
             }
             return kq;
+        }
+
+        public string testTransaction()
+        {
+            MySqlTransaction tr = null;
+
+            try
+            {
+                using (MySqlConnection connMySQL = new MySqlConnection(Conn.connString))
+                {
+                    connMySQL.Open();
+                    tr = connMySQL.BeginTransaction();
+
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = connMySQL;
+                    cmd.Transaction = tr;
+
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH='Mèo' WHERE HANGHOA_ID=8";
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH='Lợn' WHERE HANGHOA_ID=8";
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH='Gà' WHERE HANGHOA_ID=8";
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH='Trâu' WHERE HANGHOA_ID=8";
+                    cmd.CommandText = "UPDATE HANGHOA SET TEN_HH='Bò' WHERE HANGHOA_ID=8";
+
+                    //foreach (product prd in prdList)
+                    //{
+                    //    cmd.CommandText = "UPDATE products SET title='@title', quantity='@quantity' WHERE itemId LIKE '@itemId'";
+                    //    cmd.Parameters.AddWithValue("@title", prd.title);
+                    //    cmd.Parameters.AddWithValue("@quantity", prd.quantity);
+                    //    cmd.Parameters.AddWithValue("@itemId", prd.itemId);
+
+                    //    cmd.ExecuteNonQuery();
+                    //}
+
+                    tr.Commit();
+                }
+                return "Ok";
+            }
+            catch (MySqlException ex)
+            {
+                try
+                {
+                    tr.Rollback();
+                }
+                catch (MySqlException ex1)
+                {
+                    return ex1.ToString();
+                }
+
+                return ex.ToString();
+            }
+        }
+
+        public IEnumerable<Dictionary<string, object>> Serialize(MySqlDataReader reader)
+        {
+            var results = new List<Dictionary<string, object>>();
+            var cols = new List<string>();
+            for (var i = 0; i < reader.FieldCount; i++)
+                cols.Add(reader.GetName(i));
+
+            while (reader.Read())
+                results.Add(SerializeRow(cols, reader));
+
+            return results;
+        }
+        private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
+                                                        MySqlDataReader reader)
+        {
+            var result = new Dictionary<string, object>();
+            foreach (var col in cols)
+                result.Add(col, reader[col]);
+            return result;
         }
     }
 }

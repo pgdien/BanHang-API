@@ -25,6 +25,20 @@ namespace BanHang_API.Controllers
                 throw;
             }
         }
+        [HttpGet("test")]
+        public void test()
+        {
+            try
+            {
+                CT_DonHang_DTO mysqlGet = new CT_DonHang_DTO();
+                mysqlGet.testTransaction();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         // GET api/CT_DonHang/5
         [HttpGet("{id}")]
